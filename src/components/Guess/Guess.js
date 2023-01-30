@@ -7,6 +7,7 @@ function Guess({ guess, answer }) {
   let guessResults;
   if (guess) {
     guessResults = checkGuess(guess, answer);
+    guessResults.every(result => result.status === 'correct');
   }
   return (
     <p className="guess">

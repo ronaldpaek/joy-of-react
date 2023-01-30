@@ -1,6 +1,6 @@
 import React from "react";
 
-function GuessInput({ guesses, setGuesses }) {
+function GuessInput({ guesses, setGuesses, answer, isGameOver, setIsGameOver }) {
   const [guess, setGuess] = React.useState("");
 
   function handleSubmit(event) {
@@ -13,6 +13,14 @@ function GuessInput({ guesses, setGuesses }) {
       id: Date.now(),
     };
     const nextGuesses = [...guesses, newGuess];
+
+    if (guess === answer) {
+        setIsGameOver(true);
+    }
+
+    if (nextGuesses.length === 6) {
+        setIsGameOver(true);
+    }
 
     setGuesses(nextGuesses);
     setGuess("");
@@ -32,6 +40,7 @@ function GuessInput({ guesses, setGuesses }) {
       <input
         id="guess-input"
         type="text"
+        disabled={isGameOver}
         value={guess}
         onChange={handleGuessChange}
       />
